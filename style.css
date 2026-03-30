@@ -1,0 +1,80 @@
+/* 1. ზოგადი პარამეტრები */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background-color: #000; color: #fff; overflow-x: hidden; min-height: 100vh; }
+#app-container { max-width: 500px; margin: 0 auto; position: relative; min-height: 100vh; }
+
+/* 2. მთავარი ეკრანი (Home Screen) */
+#home-screen { padding: 20px; padding-bottom: 120px; width: 100%; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.welcome-text { font-size: 28px; font-weight: bold; }
+.user-id { background: #333; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 14px; }
+
+.main-banner { margin-bottom: 25px; width: 100%; }
+.main-banner img { width: 100%; border-radius: 20px; display: block; height: auto; }
+
+.section { margin-bottom: 30px; }
+.section h3 { margin-bottom: 15px; font-size: 18px; font-weight: bold; }
+
+/* ჰორიზონტალური სქროლი */
+.scroll-wrapper { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
+.scroll-wrapper::-webkit-scrollbar { display: none; }
+
+/* Grid განლაგება Nearby Facilities-სთვის */
+.grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+.place-card { min-width: 280px; position: relative; border-radius: 20px; overflow: hidden; height: 180px; background: #1a1a1a; }
+.place-card.small { min-width: unset; height: 150px; }
+.place-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+
+.card-text { position: absolute; bottom: 12px; left: 12px; z-index: 2; }
+.card-text h4 { font-size: 14px; color: white; }
+.card-text p { font-size: 11px; color: #ccc; }
+
+/* ნარინჯისფერი QR ღილაკი */
+.qr-btn { position: fixed; bottom: 95px; right: 20px; background: #FF4500; width: 60px; height: 60px; border-radius: 20px; display: flex; justify-content: center; align-items: center; z-index: 999; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3); }
+.qr-icon { font-size: 24px; }
+
+/* ფიქსირებული ნავბარი ბოლოში */
+.footer-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; height: 75px; background: #0c0c0c; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #222; z-index: 1000; }
+.nav-item { color: #555; text-align: center; font-size: 10px; display: flex; flex-direction: column; gap: 4px; }
+.nav-item.active { color: #FF4500; }
+.nav-item span { font-size: 18px; }
+
+/* 3. წარმატების ეკრანი (Success Overlay) */
+#success-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: #000; z-index: 2000; 
+    display: none; /* თავიდან დამალულია */
+    flex-direction: column; justify-content: center; align-items: center; text-align: center;
+    overflow: hidden; /* ბურთულები ეკრანს გარეთ რომ არ გავიდნენ */
+}
+#success-overlay.active { display: flex; }
+
+.check-circle { width: 110px; height: 110px; background: #4CAF50; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; z-index: 2; position: relative; box-shadow: 0 0 30px rgba(76, 175, 80, 0.4); }
+.check-mark { width: 25px; height: 50px; border: solid #fff; border-width: 0 7px 7px 0; transform: rotate(45deg); margin-bottom: 10px; }
+.close-x { position: absolute; top: 40px; right: 25px; font-size: 26px; cursor: pointer; color: white; z-index: 3; }
+.time-stamp { color: #888; margin-top: 8px; font-size: 13px; z-index: 2; }
+.workout-btn { margin-top: 50px; width: 100%; max-width: 350px; padding: 16px; background: transparent; border: 1.5px solid #FF4500; color: #FF4500; border-radius: 12px; font-weight: bold; z-index: 2; position: relative; cursor: pointer; }
+.emoji { font-family: initial; font-weight: initial; } /* ემოჯის სტილის გასწორება */
+
+/* 4. ბურთულების მუდმივი მოძრაობის სტილი */
+#particle-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* რომ ხელი არ შეუშალოს დაჭერას */
+    z-index: 1; /* თიჩკის ქვეშ */
+}
+
+.dot { 
+    position: absolute; 
+    border-radius: 50%; 
+    opacity: 0.8;
+    /* მუდმივი ტრიალის ანიმაცია */
+    animation: permanent-spin 10s linear infinite; 
+}
+
+/* CSS ანიმაცია ტრიალისთვის */
+@keyframes permanent-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
